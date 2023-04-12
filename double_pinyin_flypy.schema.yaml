@@ -14,12 +14,12 @@
 # 方案说明
 schema:
   schema_id: double_pinyin_flypy
-  name: 小鹤双拼
+  name: 小鹤双拼辅助码
   version: "1"
   author:
     - Dvel
   description: |
-    雾凇拼音 - 小鹤双拼
+    雾凇拼音 - 小鹤双拼（辅助码）
     https://github.com/iDvel/rime-ice
   dependencies:
     - melt_eng  # 英文输入，作为次翻译器挂载到拼音方案
@@ -72,6 +72,7 @@ engine:
     - lua_translator@date_translator      # 时间、日期、星期
     - table_translator@custom_phrase      # 自定义短语 custom_phrase_double.txt
     - table_translator@melt_eng           # 英文输入
+    - table_translator@flypy              # 小鹤双拼鹤形码表
     - reverse_lookup_translator@liangfen  # 反查，两分拼字
     - lua_translator@unicode              # Unicode
   filters:
@@ -168,6 +169,16 @@ liangfen:
   enable_completion: true  # 补全提示
   # tips: 〔两分〕          # 反查时显示的文字，建议注释掉，否则很多 L 开头的英文单词也会显示这个
 
+# 添加小鹤双拼鹤形辅助码
+flypy:
+  dictionary: flypy
+  enable_charset_filter: false
+  enable_sentence: false
+  enable_completion: false # 编码提示开关
+  enable_user_dict: false
+  disable_user_dict_for_patterns:
+    - "^z.*$" 
+  initial_quality: 99
 
 # 自定义短语
 custom_phrase:
